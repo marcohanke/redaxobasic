@@ -51,9 +51,9 @@ LOCK TABLES `rex_article` WRITE;
 /*!40000 ALTER TABLE `rex_article` DISABLE KEYS */;
 INSERT INTO `rex_article` VALUES 
   (1,1,0,'Startseite','Startseite',1,1,1,'|',1,2,1,'2021-03-26 21:34:37','admin','2021-03-29 07:42:05','admin',0),
-  (2,2,0,'Landingpage','Landingpage',2,1,1,'|',1,3,1,'2021-03-26 21:34:37','admin','2021-03-27 10:54:58','admin',0),
+  (2,2,0,'Landingpage','Landingpage',2,1,1,'|',1,3,1,'2021-03-26 21:34:37','admin','2021-03-29 08:29:35','admin',0),
   (3,3,0,'Fehlerseite (404)','',0,0,1,'|',1,2,1,'2021-03-26 21:34:34','admin','2021-03-26 21:41:15','admin',0),
-  (4,4,2,'Unterseite','Unterseite',1,1,1,'|2|',1,3,1,'2021-03-27 10:55:06','admin','2021-03-27 10:55:04','admin',0);
+  (4,4,2,'Unterseite','Unterseite',1,1,1,'|2|',1,3,1,'2021-03-27 10:55:06','admin','2021-03-29 08:29:45','admin',0);
 /*!40000 ALTER TABLE `rex_article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,12 +136,14 @@ CREATE TABLE `rex_article_slice` (
   KEY `clang_id` (`clang_id`),
   KEY `article_id` (`article_id`),
   KEY `find_slices` (`clang_id`,`article_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `rex_article_slice` WRITE;
 /*!40000 ALTER TABLE `rex_article_slice` DISABLE KEYS */;
 INSERT INTO `rex_article_slice` VALUES 
-  (1,1,1,1,1,0,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2021-03-27 12:22:55','admin','2021-03-27 12:22:55','admin');
+  (1,1,1,1,1,0,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2021-03-27 12:22:55','admin','2021-03-27 12:22:55','admin'),
+  (5,2,1,1,1,0,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2021-03-29 08:29:35','admin','2021-03-29 08:29:35','admin'),
+  (6,4,1,1,1,0,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2021-03-29 08:29:45','admin','2021-03-29 08:29:45','admin');
 /*!40000 ALTER TABLE `rex_article_slice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,43 +394,6 @@ INSERT INTO `rex_template` VALUES
   (3,NULL,'Landingpage','REX_TEMPLATE[id=1]\r\n\r\n<link rel=\"stylesheet\" href=\"assets/landingpage.css\">\r\n\r\n<body>\r\n<strong>Diese Seite nutzt das Template Landingpage</strong>\r\nREX_TEMPLATE[id=4]\r\nREX_ARTICLE[]\r\n</body>\r\n</html\r\n\r\n\r\n<!-- Eigentlich sieht das hier fast so aus wie im Template Standard (id 2), aber eben nur fast.\r\n\r\nWie du oben siehst wurde eine weitere CSS Datei eingebunden. Wenn ein Redakteur also in einem Artikel dieses Template wählt, wird für diese Seite auch die oben eingefügte CSS berücksichtigt. Außerdem siehst du auf jeder Seite mit diesem Template den Satz \"Das ist eine Landingpage\" Cool oder?\r\n\r\nDu kannst also wiederkehrende Elemente wie Header, Navigation, Footer oder Elemente die Hardcode auf bestimmten Seiten auftauchen sollen in verschiedene Templates auslagern und nach belieben kombinieren.\r\n\r\nWeiter gehts im Template Navigation (id 4) -->',1,'2021-03-28 21:20:49','admin','2021-03-28 21:20:49','admin','{\"ctype\":[],\"modules\":{\"1\":{\"all\":\"1\"}},\"categories\":{\"all\":\"1\"}}',0),
   (4,NULL,'Navigation','<?php\r\n$nav = rex_navigation::factory();\r\n$nav->show();\r\n?>\r\n\r\n<!-- Dieses Template ist nicht aktiv, also kann es der Redakteur nicht für einen Artikel auswählen. Das ist auch gut so, dann hier wird nur eine Navigation ausgegeben, es fehlt also das ganze HTML Gerüst. Wie du vorher gesehen hast, wurde dieses Template in das Template Standard (id 2) und in das Template Landingpage (id 3) eingebunden.\r\n\r\nZusammengefasst: Du kannst beliebig viele Templates anlegen, sie beliebig benennen. Templates die ein Redakteur wählen darf, setzt du auf Aktiv. Templates können untereinander eingebunden werden und an mindestens einer Stelle musst du den Artikel Inhalt ausgeben. Wir haben das im Template Standard (id 3) und im Template Landingpage (id 3) getan.\r\n\r\nDas wars erstmal mit den Templates. Weiter geht es mit den Modulen. Schaue dir das Modul 1.Einleitung (id 1). -->',0,'2021-03-27 12:21:35','admin','2021-03-27 12:21:35','admin','{\"ctype\":[],\"modules\":{\"1\":{\"all\":\"1\"}},\"categories\":{\"all\":\"1\"}}',0);
 /*!40000 ALTER TABLE `rex_template` ENABLE KEYS */;
-UNLOCK TABLES;
-
-DROP TABLE IF EXISTS `rex_user`;
-CREATE TABLE `rex_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `login` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL,
-  `admin` tinyint(1) NOT NULL,
-  `language` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `startpage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `login_tries` tinyint(4) NOT NULL,
-  `createdate` datetime NOT NULL,
-  `createuser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `updatedate` datetime NOT NULL,
-  `updateuser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password_changed` datetime NOT NULL,
-  `previous_passwords` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password_change_required` tinyint(1) NOT NULL,
-  `lasttrydate` datetime NOT NULL,
-  `lastlogin` datetime DEFAULT NULL,
-  `session_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cookiekey` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `revision` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-LOCK TABLES `rex_user` WRITE;
-/*!40000 ALTER TABLE `rex_user` DISABLE KEYS */;
-INSERT INTO `rex_user` VALUES 
-  (1,'Administrator',NULL,'admin','$2y$10$pZbxMof0hGl70C9M0Z9F3uVzAavnuhdGBvs8wrlwH6sdeUgA4uRxa',NULL,1,1,'','',NULL,0,'2021-03-26 21:29:01','setup','2021-03-26 21:29:01','setup','2021-03-26 21:29:01','[]',0,'2021-03-29 08:18:10','2021-03-29 08:18:10','73ue8hq0kosnkp8qiihtfpr6vd',NULL,0);
-/*!40000 ALTER TABLE `rex_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rex_user_role`;
