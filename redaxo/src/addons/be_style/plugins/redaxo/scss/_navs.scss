@@ -1,0 +1,453 @@
+.rex-is-logged-in {
+    > .navbar-toggle {
+        background: none !important;
+        border: 0;
+
+        position: fixed;
+        top: 10px;
+        right: 0;
+        z-index: 5;
+        background-color: $color-a;
+
+        @media (max-width: $screen-sm-max) {
+            margin-top: 2px;
+        }
+        > .icon-bar,
+        > .sr-only  {
+            display: none;
+        }
+
+        > .icon-bar:nth-child(2) {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 20px;
+            top: 50%;
+            margin-top: -1px;
+            left: 50%;
+            margin-left: -10px;
+            background-color: $navbar-default-toggle-border-color;
+            @include transition(background-color 0.3s 0.3s);
+
+            &:before,
+            &:after {
+                /* upper and lower lines of the menu icon */
+                content: '';
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: $navbar-default-toggle-border-color;
+                /* Force Hardware Acceleration */
+                @include translate3d(0, 0, 0);
+                @include backface-visibility(hidden);
+                @include transition-transform(0.3s 0.3s);
+            }
+
+            &:before {
+                @include translate(0, -6px);
+            }
+            &:after {
+                @include translate(0, 6px);
+            }
+        }
+    }
+    .rex-nav-main-is-visible ~ .navbar-toggle > .icon-bar:nth-child(2) {
+        background-color: rgba(255, 255, 255, 0);
+
+        &:before {
+            -webkit-transform: translateY(0) rotate(-45deg);
+               -moz-transform: translateY(0) rotate(-45deg);
+                -ms-transform: translateY(0) rotate(-45deg);
+                 -o-transform: translateY(0) rotate(-45deg);
+                    transform: translateY(0) rotate(-45deg);
+        }
+        &:after {
+            -webkit-transform: translateY(0) rotate(45deg);
+               -moz-transform: translateY(0) rotate(45deg);
+                -ms-transform: translateY(0) rotate(45deg);
+                 -o-transform: translateY(0) rotate(45deg);
+                    transform: translateY(0) rotate(45deg);
+        }
+    }
+    .rex-nav-footer {
+        a {
+            color: $color-a-dark;
+        }
+    }
+}
+
+
+.rex-nav-language {
+    @media (max-width: $grid-float-breakpoint-max) {
+        .rex-icon {
+            display: none;
+        }
+    }
+    @media (min-width: $screen-lg-min) {
+        float: right;
+        margin-left: $grid-gutter-width;
+    }
+}
+.rex-nav-main {
+    background-color: $color-a-dark;
+
+    > .navbar-collapse {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    h4 {
+        padding-left: $navbar-padding-horizontal;
+        padding-right: $navbar-padding-horizontal;
+    }
+
+    li {
+        > a {
+            padding-left: 30 + $navbar-padding-horizontal;
+            padding-right: $navbar-padding-horizontal;
+            color: $color-a;
+
+            &:hover,
+            &:focus {
+                color: $color-b;
+                background-color: $color-a-darker;
+            }
+        }
+
+        &.rex-has-icon {
+            > a {
+                > .rex-icon {
+                    text-align: center;
+                    // slighly adjust position to improve visual appeal
+                    margin-left: -28px;
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+
+
+    @media(max-width: $grid-float-breakpoint-max) {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow-x: hidden;
+        visibility: hidden;
+        width: 260px;
+        margin-bottom: 0;
+        @include transition(visibility 0s 0.3s);
+        -webkit-overflow-scrolling: touch;
+        /* Force Hardware Acceleration */
+        @include translate3d(0, 0, 0);
+        @include transition(visibility 0s 0.3s);
+        -webkit-overflow-scrolling: touch;
+
+        &.rex-nav-main-is-visible {
+            visibility: visible;
+            @include transition(visibility 0s 0s);
+        }
+
+        .navbar-collapse {
+            display: block;
+            border: 0;
+            box-shadow: none;
+        }
+        .rex-nav-main-title:first-child {
+            padding-top: 0;
+        }
+    }
+}
+.navbar-header {
+    position: relative;
+}
+.rex-nav-main-title {
+    margin-top: floor($line-height-computed * 2);
+    color: $color-a-lighter;
+    font-size: $font-size-large;
+}
+.rex-nav-meta {
+    .navbar-nav {
+        > li {
+            > a,
+            > a:hover {
+                color: #fff;
+            }
+            > a:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    .text-muted {
+        color: $color-a-dark;
+    }
+
+    @media(max-width: $grid-float-breakpoint-max) {
+        .navbar-btn,
+        .text-muted {
+            display: none;
+        }
+        .navbar-nav {
+            margin-bottom: 0;
+            > li {
+                float: left;
+                > a {
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+.rex-nav-pagination {
+    margin-bottom: $line-height-computed / 2;
+
+    .rex-page {
+        height: auto;
+    }
+}
+
+.rex-nav-top {
+    min-height: $top-navbar-height;
+    margin-bottom: 0;
+    padding-top: floor(($top-navbar-height - $navbar-height) / 2);
+    padding-bottom: floor(($top-navbar-height - $navbar-height) / 2);
+    background-color: $color-b;
+    border-color: $color-b;
+    border-radius: 0;
+
+    .rex-is-popup & {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.rex-page-nav {
+    .nav-tabs {
+        border-bottom-color: darken($color-a-light, 5%);
+        .rex-main-frame & {
+            border-bottom-color: #fff;
+        }
+
+        > li {
+            &.active {
+                > a:not(.btn),
+                > a:not(.btn):hover {
+                    padding-bottom: 10px;
+                    background-color: #fff;
+                    border-color: darken($color-a-light, 5%);
+                    border-bottom-color: transparent;
+
+                    .rex-main-frame & {
+                        background-color: $nav-tabs-active-link-hover-bg;
+                        border-color: $nav-tabs-active-link-hover-bg;
+                        border-bottom-color: transparent;
+                    }
+                }
+            }
+
+            > a:not(.btn) {
+                padding-top: 10px;
+                padding-bottom: 9px;
+                background-color: $color-a-light;
+                border-color: $color-a-light;
+                border-bottom-color: transparent;
+
+                border-radius: 4px 4px 0 0;
+                color: $text-color;
+
+                .rex-main-frame & {
+                    background-color: darken($color-a-light, 5%);
+                    border-color: darken($color-a-light, 5%);
+                    border-bottom-color: transparent;
+                }
+
+                &:hover {
+                    background-color: $color-a-light;
+                    border-color: $color-a-light;
+                    color: $color-b;
+                }
+            }
+        }
+    }
+    // Tab subnavigation
+    .navbar {
+        background-color: #fff;
+        border-color: $color-a-light;
+
+        .rex-main-frame & {
+            border-color: #fff;
+        }
+    }
+    .navbar-default .navbar-nav {
+        @media (max-width: $screen-xs-max) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+    }
+    .navbar-default .navbar-nav > li:not(:last-child):after {
+        content: '';
+        display: inline-block;
+        float: left;
+        height: $line-height-computed;
+        margin-top: 12px;
+        border-right: 1px solid $color-a-light;
+    }
+    .navbar-default .navbar-nav > li > a {
+        float: left;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        color: $color-b;
+    }
+    .navbar-default .navbar-nav > .rex-empty > a {
+        color: $color-a;
+    }
+    .navbar-default .navbar-nav > li > a:hover,
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: $text-color;
+    }
+}
+
+.rex-slice-input .nav-tabs {
+    margin-bottom: $line-height-computed;
+}
+
+.panel-heading .nav-tabs {
+    border-bottom: 0;
+    margin-bottom: -10px;
+    display: flex; // avoid collapsing margins
+
+    > li {
+        &.active {
+            > a:not(.btn),
+            > a:not(.btn):hover {
+                padding-bottom: $padding-small-vertical;
+                background-color: #fff;
+
+                .panel-edit & {
+                    background-color: $color-d-lighter;
+                }
+            }
+        }
+
+        > a:not(.btn) {
+            padding-top: $padding-small-vertical;
+            padding-bottom: $padding-small-vertical - 1;
+            background-color: lighten($color-a-light, 5%);
+            border-color: transparent;
+            border-radius: 4px 4px 0 0;
+            color: $text-color;
+
+            .panel-edit & {
+                background-color: $color-d-light;
+            }
+
+            &:hover {
+                background-color: lighten($color-a-light, 8%);
+
+                .panel-edit & {
+                    background-color: lighten($color-d-light, 7%);
+                }
+            }
+        }
+    }
+}
+
+.rex-nav-toc {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    bottom: 20px;
+    max-height: 100vh;
+    overflow-y: auto;
+    margin-left: $grid-gutter-width / -2;
+    margin-right: $grid-gutter-width / -2;
+    padding-top: 26px;
+    font-size: $font-size-base;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    a {
+        display: block;
+        padding: 1rem $grid-gutter-width / 2;
+        text-decoration: none;
+    }
+
+    > ul > li + li {
+        margin-top: $line-height-computed;
+    }
+    > ul > li > a {
+        background-color: $color-a-lighter;
+    }
+    > ul > li > ul {
+        padding-top: .5rem;
+    }
+
+    > ul > li ul > li > a {
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        padding-left: $grid-gutter-width;
+
+        &::before {
+            content: '\f061';
+            float: left;
+            margin-top: .25em;
+            margin-left: $grid-gutter-width / -2;
+            color: $color-a-light;
+            font-family: FontAwesome;
+            font-size: 10px;
+            vertical-align: .15;
+        }
+    }
+    // level 3
+    > ul > li > ul > li > ul > li > a {
+        padding-left: $grid-gutter-width * 1.5;
+    }
+    // level 4
+    > ul > li > ul > li > ul > li > ul > li > a {
+        padding-left: $grid-gutter-width * 3;
+    }
+    // level 5
+    > ul > li > ul > li > ul > li > ul > li > ul > li > a {
+        padding-left: $grid-gutter-width * 4.5;
+    }
+    // level 6
+    > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > a {
+        padding-left: $grid-gutter-width * 6;
+    }
+}
+
+.rex-navbar-without-brand {
+    .container-fluid,
+    .navbar-collapse {
+        padding-left: 0;
+    }
+}
+
+#rex-page-setup {
+    .rex-nav-main {
+        li {
+            > a {
+                padding-left: $navbar-padding-horizontal;
+            }
+            &.active > a {
+                cursor: default;
+            }
+            &.disabled > a {
+                cursor: default;
+                color: $color-a;
+                background-color: transparent;
+            }
+        }
+    }
+}

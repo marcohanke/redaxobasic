@@ -1,0 +1,10 @@
+{
+    "require": { "phpmailer/phpmailer": "^6.1.6" },
+
+    "config": {
+        "platform": {
+            "php": "7.3.0"
+        },
+        "platform-check": false
+    }
+}
